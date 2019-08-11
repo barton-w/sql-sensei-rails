@@ -8325,3 +8325,12 @@ Processing by UsersController#login as */*
 Completed 200 OK in 217ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 5487)
 
 
+Started POST "/users/login" for ::1 at 2019-08-11 16:22:31 -0600
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"username"=>"tester4", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "tester4"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `login'
+Completed 200 OK in 218ms (Views: 0.2ms | ActiveRecord: 5.7ms | Allocations: 6705)
+
+
