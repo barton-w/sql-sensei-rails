@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:3001', 'barton-w.github.io/sql-sensei/'
+    origins 'localhost:3001', 'https://barton-w.github.io'
 
     resource '*',
       headers: :any,
