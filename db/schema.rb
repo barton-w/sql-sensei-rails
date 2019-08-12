@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_221423) do
+ActiveRecord::Schema.define(version: 2019_08_11_235925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2019_08_10_221423) do
     t.integer "music_friend_id", null: false
     t.integer "music_band_id", null: false
     t.index ["music_id"], name: "index_friends_music_on_music_id", unique: true
+  end
+
+  create_table "solutions", force: :cascade do |t|
+    t.string "solution"
+    t.string "training"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spirit_animals", id: false, force: :cascade do |t|

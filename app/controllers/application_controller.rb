@@ -33,6 +33,6 @@ class ApplicationController < ActionController::API
 
   #For user-specific request, match the user from the token with the id passed in params
   def authorize_user
-    render json: {message: "Unauthorized"}, status: 401 unless get_current_user.id == params[:id].to_i
+    render json: {message: "Unauthorized"}, status: 401 unless get_current_user.id == params[:user_id].to_i
   end
 end

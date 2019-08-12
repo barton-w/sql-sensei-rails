@@ -8334,3 +8334,268 @@ Processing by UsersController#login as */*
 Completed 200 OK in 218ms (Views: 0.2ms | ActiveRecord: 5.7ms | Allocations: 6705)
 
 
+Started POST "/users/login" for ::1 at 2019-08-11 17:33:08 -0600
+Processing by UsersController#login as JSON
+  Parameters: {"username"=>"tester1", "password"=>"[FILTERED]", "user"=>{"username"=>"tester1"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "tester1"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `login'
+[31mUnpermitted parameter: :user[0m
+Completed 200 OK in 208ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 1129)
+
+
+Started POST "/query" for ::1 at 2019-08-11 17:33:17 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from friends;", "query"=>{"query_statement"=>"select * from friends;"}}
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (2.2ms)[0m  [1m[34mselect * from friends;[0m
+  ↳ app/controllers/query_controller.rb:6:in `create'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 2.2ms | Allocations: 1471)
+
+
+Started POST "/query" for ::1 at 2019-08-11 17:33:22 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (1.5ms)[0m  [1m[34mselect * from spirit_animals where spirit_animal_friend_id = 6;[0m
+  ↳ app/controllers/query_controller.rb:6:in `create'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 726)
+
+
+Started POST "/query" for ::1 at 2019-08-11 17:33:24 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+Filter chain halted as :authenticate_token rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 133)
+
+
+Started POST "/query" for ::1 at 2019-08-11 17:40:02 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.5ms)[0m  [1m[34mselect * from spirit_animals where spirit_animal_friend_id = 6;[0m
+  ↳ app/controllers/query_controller.rb:6:in `create'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 728)
+
+
+Started POST "/query" for ::1 at 2019-08-11 17:40:04 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect * from spirit_animals where spirit_animal_friend_id = 6;[0m
+  ↳ app/controllers/query_controller.rb:6:in `create'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 726)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5523395904321004290)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSolutions (20190811234942)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.6ms)[0m  [1m[35mCREATE TABLE "solutions" ("id" bigserial primary key, "solution" character varying, "training" character varying, "user_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190811234942"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5523395904321004290)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5523395904321004290)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MakeUserIdRequired (20190811235925)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "solutions" ALTER COLUMN "user_id" SET NOT NULL[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190811235925"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5523395904321004290)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/users/login" for ::1 at 2019-08-11 18:06:07 -0600
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"username"=>"tester1", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "tester1"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `login'
+Completed 200 OK in 210ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 5473)
+
+
+Started POST "/solutions" for ::1 at 2019-08-11 18:07:03 -0600
+Processing by SolutionsController#create as */*
+  Parameters: {"solution"=>"select * from friends;", "training"=>"joinTraining1", "user_id"=>"8"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1306)
+
+
+  
+NoMethodError (undefined method `permit' for "select * from friends;":String):
+  
+app/controllers/solutions_controller.rb:50:in `solution_params'
+app/controllers/solutions_controller.rb:19:in `create'
+Started POST "/solutions" for ::1 at 2019-08-11 18:09:13 -0600
+Processing by SolutionsController#create as */*
+  Parameters: {"solution"=>"test", "training"=>"joinTraining1", "user_id"=>"8"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1068)
+
+
+  
+NoMethodError (undefined method `permit' for "test":String):
+  
+app/controllers/solutions_controller.rb:50:in `solution_params'
+app/controllers/solutions_controller.rb:19:in `create'
+Started POST "/solutions" for ::1 at 2019-08-11 18:10:03 -0600
+Processing by SolutionsController#create as */*
+  Parameters: {"solution"=>"select * from friends;", "training"=>"joinTraining1", "user_id"=>"8"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[36mSolution Create (1.9ms)[0m  [1m[32mINSERT INTO "solutions" ("solution", "training", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["solution", "select * from friends;"], ["training", "joinTraining1"], ["user_id", 8], ["created_at", "2019-08-12 00:10:03.281743"], ["updated_at", "2019-08-12 00:10:03.281743"]]
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+Completed 201 Created in 17ms (Views: 0.3ms | ActiveRecord: 7.0ms | Allocations: 7215)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:15:59 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mSolution Load (0.4ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 LIMIT $2[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/solutions_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 5306)
+
+
+Started POST "/solutions" for ::1 at 2019-08-11 18:16:15 -0600
+Processing by SolutionsController#create as */*
+  Parameters: {"solution"=>"select * from bands;", "training"=>"joinTraining1", "user_id"=>"8"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:20:in `create'
+  [1m[36mSolution Create (0.6ms)[0m  [1m[32mINSERT INTO "solutions" ("solution", "training", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["solution", "select * from bands;"], ["training", "joinTraining1"], ["user_id", 8], ["created_at", "2019-08-12 00:16:15.505869"], ["updated_at", "2019-08-12 00:16:15.505869"]]
+  ↳ app/controllers/solutions_controller.rb:20:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:20:in `create'
+Completed 201 Created in 4ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 2533)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:16:38 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 LIMIT $2[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/solutions_controller.rb:7:in `index'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 926)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:16:45 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 LIMIT $2[0m  [["user_id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/solutions_controller.rb:7:in `index'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 933)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:18:11 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:8:in `index'
+Completed 200 OK in 16ms (Views: 8.4ms | ActiveRecord: 5.1ms | Allocations: 5767)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:26:12 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:9:in `index'
+Completed 200 OK in 18ms (Views: 5.0ms | ActiveRecord: 5.0ms | Allocations: 10710)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:26:19 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+Filter chain halted as :authorize_user rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 889)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:26:37 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:9:in `index'
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms | Allocations: 2020)
+
+
+Started POST "/solutions" for ::1 at 2019-08-11 18:26:46 -0600
+Processing by SolutionsController#create as */*
+  Parameters: {"solution"=>"select * from spirit_animals;", "training"=>"joinTraining1", "user_id"=>"8"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[36mSolution Create (0.6ms)[0m  [1m[32mINSERT INTO "solutions" ("solution", "training", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["solution", "select * from spirit_animals;"], ["training", "joinTraining1"], ["user_id", 8], ["created_at", "2019-08-12 00:26:46.965540"], ["updated_at", "2019-08-12 00:26:46.965540"]]
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+Completed 201 Created in 8ms (Views: 0.4ms | ActiveRecord: 1.5ms | Allocations: 3167)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:26:50 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:9:in `index'
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.7ms | Allocations: 2169)
+
+
+Started DELETE "/solutions/1" for ::1 at 2019-08-11 18:31:50 -0600
+Processing by SolutionsController#destroy as */*
+  Parameters: {"user_id"=>"8", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/solutions_controller.rb:45:in `set_solution'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+  [1m[36mSolution Destroy (0.3ms)[0m  [1m[31mDELETE FROM "solutions" WHERE "solutions"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+Completed 204 No Content in 5ms (ActiveRecord: 1.1ms | Allocations: 3158)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:31:56 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:9:in `index'
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.4ms | Allocations: 2022)
+
+
+Started DELETE "/solutions/3" for ::1 at 2019-08-11 18:32:52 -0600
+Processing by SolutionsController#destroy as */*
+  Parameters: {"user_id"=>"8", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/solutions_controller.rb:46:in `set_solution'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+  [1m[36mSolution Destroy (0.2ms)[0m  [1m[31mDELETE FROM "solutions" WHERE "solutions"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:39:in `destroy'
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 6.3ms | Allocations: 12041)
+
+
+Started GET "/solutions" for ::1 at 2019-08-11 18:32:57 -0600
+Processing by SolutionsController#index as */*
+  Parameters: {"user_id"=>"8"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[36mSolution Load (0.2ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1[0m  [["user_id", 8]]
+  ↳ app/controllers/solutions_controller.rb:9:in `index'
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 1884)
+
+
