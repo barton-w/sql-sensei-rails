@@ -1,5 +1,6 @@
 class QueryController < ApplicationController
   before_action :authenticate_token
+  before_action :is_user_disabled
   before_action :validate_query
 
   def create
@@ -42,13 +43,16 @@ class QueryController < ApplicationController
 
     forbidden_patterns.each do |pattern|
       if validation_query.match?(pattern)
-        render json: {syntax: false, error: "Unprocessable!"}, status: 422
+        decoded_jwt = decode_token(bearer_token)
+        user = User.find(decoded_jwt[0]["user"]["id"])
+        user.update(active: "disabled")
+        render json: {message: "user violation"}, status: 200
         return
       end
     end
 
     #Other words to block, with less consequences
-    error_patterns = [/alter/, /modify/, /function/, /procedure/, /table/, /if/, /else/, /while/, /def/, /set/, /rails/, /git/, /update/, /insert/, /into/, /solution/, /solutions/]
+    error_patterns = [/alter/, /modify/, /function/, /procedure/, /table/, /if/, /else/, /while/, /def/, /set/, /rails/, /git/, /update/, /insert/, /into/, /solution/, /solutions/, /create/]
 
     error_patterns.each do |pattern|
       if validation_query.match?(pattern)

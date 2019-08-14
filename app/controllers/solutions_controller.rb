@@ -4,15 +4,15 @@ class SolutionsController < ApplicationController
   before_action :set_solution, only: [:show, :update, :destroy]
 
   # GET /solutions
-  def index
-    @solutions = Solution.where(user_id: solution_params[:user_id])
-    render json: {solutions: @solutions}, status: 200
-  end
+  # def index
+  #   @solutions = Solution.where(user_id: solution_params[:user_id])
+  #   render json: {solutions: @solutions}, status: 200
+  # end
 
   # GET /solutions/1
-  def show
-    render json: {solutions: @solution}, status: 200
-  end
+  # def show
+  #   render json: {solutions: @solution}, status: 200
+  # end
 
   # POST /solutions
   def create
@@ -25,14 +25,20 @@ class SolutionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /solutions/1
-  def update
-    if @solution.update(solution_params)
-      render json: @solution
-    else
-      render json: @solution.errors, status: :unprocessable_entity
-    end
+  # POST /solutions/user
+  def user
+    @solutions = Solution.where(user_id: solution_params[:user_id]).order(created_at: :desc)
+    render json: {solutions: @solutions}, status: 200
   end
+
+  # PATCH/PUT /solutions/1
+  # def update
+  #   if @solution.update(solution_params)
+  #     render json: @solution
+  #   else
+  #     render json: @solution.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /solutions/1
   def destroy

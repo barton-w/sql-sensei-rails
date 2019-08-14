@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :solutions
+  resources :solutions, only: [:create, :destroy, :user] do
+    collection do
+      post "/user", to: "solutions#user"
+    end
+  end
   resources :users, only: [:create] do
     collection do
       post "/login", to: "users#login"

@@ -31,6 +31,21 @@ class ApplicationController < ActionController::API
     User.find(decoded_jwt[0]["user"]["id"])
   end
 
+  def is_user_disabled
+    decoded_jwt = decode_token(bearer_token)
+    user = User.find(decoded_jwt[0]["user"]["id"])
+    if user.active == "disabled"
+      render json: {message: "Unauthorized"}, status: 401
+      return
+    end
+  end
+
+  # def deactivate_current_user
+  #   decoded_jwt = decode_token(bearer_token)
+  #   user = User.find(decoded_jwt[0]["user"]["id"])
+  #   user.update(active: false)
+  # end
+
   #For user-specific request, match the user from the token with the id passed in params
   def authorize_user
     render json: {message: "Unauthorized"}, status: 401 unless get_current_user.id == params[:user_id].to_i

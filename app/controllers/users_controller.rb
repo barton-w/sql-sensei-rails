@@ -35,6 +35,10 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(username: user_params[:username])
     if user && user.authenticate(user_params[:password])
+      if user.active == "disabled"
+        render json: {message: "Unable to log you in"}, status: 401
+        return
+      end
       token = create_token(user.id, user.username)
       render json: {token: token, user_id: user.id, username: user.username}, status: 200
     else
