@@ -14,7 +14,8 @@ class QueryController < ApplicationController
 
   def validate_query
     query = query_params[:query_statement]
-    validation_query = query.downcase
+    #validation_query = query.downcase
+    validation_query = query
 
     #remove leading and trailing whitespace
     validation_query.gsub!(/\A\s+/, "")
