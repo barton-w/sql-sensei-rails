@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     end
   end
   resources :query, only: [:create]
+  resources :wakes, only: [:index]
   root "welcome#index"
 end
