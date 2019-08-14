@@ -13136,3 +13136,138 @@ Processing by UsersController#login as */*
 Completed 401 Unauthorized in 205ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 779)
 
 
+Started POST "/users/login" for ::1 at 2019-08-13 20:44:44 -0600
+Processing by UsersController#login as JSON
+  Parameters: {"username"=>"tester1", "password"=>"[FILTERED]", "user"=>{"username"=>"tester1"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "tester1"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `login'
+[31mUnpermitted parameter: :user[0m
+Completed 401 Unauthorized in 201ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 857)
+
+
+Started POST "/users/login" for ::1 at 2019-08-13 20:44:52 -0600
+Processing by UsersController#login as JSON
+  Parameters: {"username"=>"tester2", "password"=>"[FILTERED]", "user"=>{"username"=>"tester2"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "tester2"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:36:in `login'
+[31mUnpermitted parameter: :user[0m
+Completed 200 OK in 207ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 990)
+
+
+Started POST "/solutions/user" for ::1 at 2019-08-13 20:44:57 -0600
+Processing by SolutionsController#user as JSON
+  Parameters: {"user_id"=>5, "solution"=>{"user_id"=>5}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+[31mUnpermitted parameter: :solution[0m
+  [1m[36mSolution Load (0.4ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 ORDER BY "solutions"."created_at" DESC[0m  [["user_id", 5]]
+  ↳ app/controllers/solutions_controller.rb:31:in `user'
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 1.9ms | Allocations: 2028)
+
+
+Started POST "/query" for ::1 at 2019-08-13 20:45:26 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:36:in `is_user_disabled'
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect * from spirit_animals where spirit_animal_friend_id = 6;[0m
+  ↳ app/controllers/query_controller.rb:7:in `create'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1415)
+
+
+Started POST "/query" for ::1 at 2019-08-13 20:45:28 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "query"=>{"query_statement"=>"select * from spirit_animals where spirit_animal_friend_id = 6;"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:36:in `is_user_disabled'
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect * from spirit_animals where spirit_animal_friend_id = 6;[0m
+  ↳ app/controllers/query_controller.rb:7:in `create'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1367)
+
+
+Started POST "/solutions" for ::1 at 2019-08-13 20:45:30 -0600
+Processing by SolutionsController#create as JSON
+  Parameters: {"solution"=>"select * from spirit_animals where spirit_animal_friend_id = 6;", "training"=>"joinTraining1", "user_id"=>5}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[36mSolution Create (0.5ms)[0m  [1m[32mINSERT INTO "solutions" ("solution", "training", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["solution", "select * from spirit_animals where spirit_animal_friend_id = 6;"], ["training", "joinTraining1"], ["user_id", 5], ["created_at", "2019-08-14 02:45:30.678222"], ["updated_at", "2019-08-14 02:45:30.678222"]]
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+Completed 201 Created in 10ms (Views: 0.3ms | ActiveRecord: 2.3ms | Allocations: 6706)
+
+
+Started POST "/solutions/user" for ::1 at 2019-08-13 20:45:33 -0600
+Processing by SolutionsController#user as JSON
+  Parameters: {"user_id"=>5, "solution"=>{"user_id"=>5}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+[31mUnpermitted parameter: :solution[0m
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 ORDER BY "solutions"."created_at" DESC[0m  [["user_id", 5]]
+  ↳ app/controllers/solutions_controller.rb:31:in `user'
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.5ms | Allocations: 1977)
+
+
+Started POST "/query" for ::1 at 2019-08-13 20:46:18 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select avg(records_sold) from bands;", "query"=>{"query_statement"=>"select avg(records_sold) from bands;"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:36:in `is_user_disabled'
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.6ms)[0m  [1m[34mselect avg(records_sold) from bands;[0m
+  ↳ app/controllers/query_controller.rb:7:in `create'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1345)
+
+
+Started POST "/query" for ::1 at 2019-08-13 20:46:20 -0600
+Processing by QueryController#create as JSON
+  Parameters: {"query_statement"=>"select avg(records_sold) from bands;", "query"=>{"query_statement"=>"select avg(records_sold) from bands;"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:36:in `is_user_disabled'
+[31mUnpermitted parameter: :query[0m
+  [1m[35m (0.2ms)[0m  [1m[34mselect avg(records_sold) from bands;[0m
+  ↳ app/controllers/query_controller.rb:7:in `create'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1345)
+
+
+Started POST "/solutions" for ::1 at 2019-08-13 20:46:21 -0600
+Processing by SolutionsController#create as JSON
+  Parameters: {"solution"=>"select avg(records_sold) from bands;", "training"=>"aggregateTraining1", "user_id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[36mSolution Create (0.3ms)[0m  [1m[32mINSERT INTO "solutions" ("solution", "training", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["solution", "select avg(records_sold) from bands;"], ["training", "aggregateTraining1"], ["user_id", 5], ["created_at", "2019-08-14 02:46:21.295762"], ["updated_at", "2019-08-14 02:46:21.295762"]]
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/solutions_controller.rb:21:in `create'
+Completed 201 Created in 6ms (Views: 0.3ms | ActiveRecord: 1.4ms | Allocations: 3153)
+
+
+Started POST "/solutions/user" for ::1 at 2019-08-13 20:46:26 -0600
+Processing by SolutionsController#user as JSON
+  Parameters: {"user_id"=>"5", "solution"=>{"user_id"=>"5"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:31:in `get_current_user'
+[31mUnpermitted parameter: :solution[0m
+  [1m[36mSolution Load (0.3ms)[0m  [1m[34mSELECT "solutions".* FROM "solutions" WHERE "solutions"."user_id" = $1 ORDER BY "solutions"."created_at" DESC[0m  [["user_id", 5]]
+  ↳ app/controllers/solutions_controller.rb:31:in `user'
+Completed 200 OK in 4ms (Views: 1.6ms | ActiveRecord: 0.6ms | Allocations: 2106)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5523395904321004290)[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveColumnActive (20190814030116)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "active"[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190814030116"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(5523395904321004290)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
