@@ -70,7 +70,7 @@ class QueryController < ApplicationController
 
     #Query must include from
     if !validation_query.match(/from/)
-      render json: {syntax: false, error: "Make sure you're selecting FROM somthing"}, status: 200
+      render json: {syntax: false, error: "Make sure you're selecting FROM something"}, status: 200
       return
     end
 
