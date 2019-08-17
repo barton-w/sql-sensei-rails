@@ -40,7 +40,7 @@ class QueryController < ApplicationController
     validation_query.gsub!(/&/, "")
 
     #Most severe words to block
-    forbidden_patterns = [/drop/, /database/, /truncate/, /delete/, /exec/, /execute/, /users/, /user/]
+    forbidden_patterns = [/drop/, /database/, /truncate/, /delete/, /exec/, /execute/, /users/, /user/, /postgres/, /sql/, /db/, /metadata/, /ar_internal_metadata/, /schema/, /schema_migrations/, /solutions_id_seq/]
 
     forbidden_patterns.each do |pattern|
       if validation_query.match?(pattern)
@@ -53,7 +53,7 @@ class QueryController < ApplicationController
     end
 
     #Other words to block, with less consequences
-    error_patterns = [/alter/, /modify/, /function/, /procedure/, /table/, /if/, /else/, /while/, /def/, /set/, /rails/, /git/, /update/, /insert/, /into/, /solution/, /solutions/, /create/]
+    error_patterns = [/alter/, /modify/, /function/, /procedure/, /table/, /if/, /else/, /while/, /def/, /set/, /rails/, /git/, /update/, /insert/, /into/, /solution/, /solutions/, /create/, /union/]
 
     error_patterns.each do |pattern|
       if validation_query.match?(pattern)
